@@ -3,9 +3,11 @@ adj_det = Face_recog()
 import os
 import numpy as np
 import string
+# from face_detector import Face_detector
+# face_detect = Face_detector()
 class Encoding:
 
-    def extract_feat(self,model):
+    def extract_feat(self,model,graph):
         features = np.zeros((1, 128))
         # label = np.zeros(1)
         a = 0
@@ -19,12 +21,13 @@ class Encoding:
             for i in pa:
                 string = li + i
                 print(string)
-                pred = adj_det.adj_detect_face(string,model)
-                features = np.append(features, pred, axis=0)
-                label.append(a)
-                sp = string.split('/')
-                nam = sp[-2]
-                name.append(nam)
+                with graph.as_default():
+                    pred = adj_det.adj_detect_face(string,model)
+                    features = np.append(features, pred, axis=0)
+                    label.append(a)
+                    sp = string.split('/')
+                    nam = sp[-2]
+                    name.append(nam)
 
             a = a + 1
 
@@ -38,9 +41,9 @@ class Encoding:
 
 
     def load_feat(self):
-        features = np.load('encoding.npy')
-        label = np.load('label.npy')
-        name = np.load('face_name.npy')
+        features = np.load('test_encoding.npy')
+        label = np.load('test_label.npy')
+        name = np.load('test_face_name.npy')
         return features,label,name
 
 

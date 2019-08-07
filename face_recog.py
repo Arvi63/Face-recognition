@@ -25,6 +25,7 @@ class Face_recog:
         img = img / 255
         #     tr_img = img.transpose((2, 1, 0))
         tr_img = np.expand_dims(img, axis=0)
+
         pred_feature = inception_model.predict(tr_img)
         return pred_feature
 

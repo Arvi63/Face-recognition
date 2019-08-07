@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+    <head> <title>Add Image</title></head>
+
+    <body>
+        <form action="" method="post" enctype = "multipart/form-data" name='userForm' id="formSubmit">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <span id="err_name"></span>
+            <br><br>
+            Select Image:
+            <input type="file" name="image" id="image">
+            <span id="err_image"></span>
+            <br><br>
+            Id:
+            <input type="number" name="id" id="id">
+            <span id="err_id"></span><br><br>
+            <input type="submit" name="submit" value='Upload'>
+            <!-- <input type="submit" name="goback" value="GO Back"> -->
+        </form>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" >
+            $("#formSubmit").submit(function(e){
+                e.preventDefault();
+                var name = document.userForm.name.value;
+                var id = document.userForm.id.value;
+                var image = document.userForm.image.value;
+                // var image = document.getElementById('image').value;
+
+                
+                if(image.trim() != ''){
+                var file = document.getElementById("image").files[0];
+                var t = file.type.split('/').pop().toLowerCase();
+                }
+
+                if(name.trim() == ''){
+                    console.log("name");
+                    $("#err_name").text("Name cannot be empty");
+                }
+                else if(id.trim() == ''){
+                    $("#err_id").text("ID cannot be empty");
+                }
+                else if(image.trim() == ''){
+                    $("#err_image").text("Image cannot be empty");
+                }
+                else if(t != "jpeg" && t != "jpg" && t != "png") {
+                    $("#err_image").text("File type should be image");
+                }
+                else{
+                    var formData = new FormData();
+                    console.log(formData);
+                    formData.append("file", file);
+                    console.log(name)
+                    console.log(id)
+                    console.log(formData.get('file'))
+                    $('form').on('submit', function(event) {
+                        // event.preventDefault();
+                            $.ajax({
+                                data : {
+                                    name : $('#name').val(),
+                                    id : $('#id').val(),
+                                    image : formData.get('file')
+                                },
+                                type : 'POST',  
+                                url : '{{ url_for('add_image_form')}}',
+                                processData: false,
+                                contentType: false
+                            })
+
+                    });
+                }
+            });
+            
+
+
+                // if(name.trim() == ""){
+                //     // document.getElementById("err_name").innerHTML = "Name cannot be empty";
+                //     // document.userForm.name.focus();
+                //     // return false;
+                // }
+
+                // if(id.trim() == ""){
+                //     // document.getElementById("err_id").innerHTML = "ID cannot be empty";
+                //     // document.userForm.id.focus();
+                //     // return false;
+                // }
+
+                // if(image.trim() == ""){
+                //     document.getElementById("err_image").innerHTML = "Insert Image";
+                //     // document.userForm.image.focus();
+                //     // return false;
+                // }
+
+                
+                // var file = document.getElementById("image").files[0];
+                // var t = file.type.split('/').pop().toLowerCase();
+                // if (t != "jpeg" && t != "jpg" && t != "png") {
+                //     alert('Please select a valid image file');
+                //     document.getElementById("image").value = '';
+                //     return false;
+                // }
+
+               
+                    
+          
+        </script>
+
+    </body>
+</html>
+
+
+
+

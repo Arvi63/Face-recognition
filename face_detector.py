@@ -48,3 +48,21 @@ class Face_detector:
 
         return frame
 
+
+    def adj_detect_face(self,img,inception_model):
+        img = cv2.imread(img)
+        face_img = img.copy()
+        roi = img.copy()
+        hog_face_detector = dlib.get_frontal_face_detector()
+        face_rects = hog_face_detector(face_img, 1)
+        for face in face_rects:
+            #         cv2.rectangle(face_img, (x,y), (x+w,y+h), (255,255,255), 10)
+            x = face.left()
+            y = face.top()
+            w = face.right() - x
+            h = face.bottom() - y
+            roi = roi[y:y + h, x:x + w]
+            #         print(roi.shape)
+            feat = face_rec.facenet_predict(roi, inception_model)
+        return feat
+
