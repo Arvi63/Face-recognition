@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+body{
+	background: url(img/96913928-creative-glowing-digital-head-wallpaper-robotics-and-cyberspace-concept-3d-rendering.jpg) no-repeat; 
+    background-size: cover;
+}
+.modal-dialog {
+	margin-right: 100px;
+	margin-top: 70px;
+}
+.modal-content {
+	background-color: #3b4652;
+	opacity: .95;
+	padding: 0 18px;
+	box-shadow: 0px 0px 3px #848484;
+
+}
+.form-group {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+button {
+	width: 40%;
+	margin: 30px 0 50px;
+}
+.btn {
+	color: #fff;
+	font-size: 25px;
+	padding: 7px 14px;
+	border-radius: 5px;
+}
+.btn:hover, .btn:focus {
+	background-color: #25a890!important;
+	border-bottom: 4px solid #25a890!important;
+}
+.btn1{
+	background-color: #f44336;
+	border-bottom: 4px solid #f44340;
+}
+.btn1:hover, .btn1:focus {
+	background-color:#da190b!important;
+	border-bottom: 4px solid #da190b!important;
+}
+.btn2{
+	background-color: #ff9800;
+	border-bottom: 4px solid #ff9800;
+}
+.btn2:hover, .btn2:focus {
+	background-color: #e68a00!important;
+	border-bottom: 4px solid #e68a00!important;
+}
+
+.btn3{
+	background-color: #2196F3;
+	border-bottom: 4px solid #2196F3;
+}
+.btn3:hover, .btn3:focus {
+	background-color: #0b7dda!important;
+	border-bottom: 4px solid #0b7dda!important;
+}
+
+.svg-inline--fa {
+	font-size: 20px;
+	margin-right: 7px;
+}
+

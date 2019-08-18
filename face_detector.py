@@ -1,6 +1,10 @@
 from face_recog import Face_recog
 import cv2
 import dlib
+import csv
+import datetime
+import time
+import pandas as pd
 
 from check_distance import Check_distance
 check_dist = Check_distance()
@@ -8,7 +12,10 @@ face_rec = Face_recog()
 class Face_detector:
 
     def haar_cascade_detector(self,image,threshold,inception_model):
-
+        df=pd.read_csv("StudentDetails.csv")
+        df = df.drop('Unnamed: 0', axis=1)
+        col_names =  ['Name','Date','Time']
+        attendance = pd.DataFrame(columns = col_names)   
         frame = image.copy()
         face_cascade = cv2.CascadeClassifier('haarcascade/haarcascade_frontalface_default.xml')
         face_rects = face_cascade.detectMultiScale(frame, scaleFactor=1.2, minNeighbors=3)
@@ -19,12 +26,23 @@ class Face_detector:
                 feat = face_rec.facenet_predict(roi,inception_model)
                 re, sim_dist,name = check_dist.cosine_check(feat)
                 if (sim_dist >= threshold):
+                    ts = time.time()      
+                    date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
+                    timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+                    try:
+                        aa=df.loc[df['Name'] == name[re]].values
+                        ab= aa[0][1]
+                        print("aa ko print::::",aa)
+                        attendance.loc[len(attendance)] = [ab,date,timeStamp]
+                    except:
+                        print("face name not in csv file")
                     cv2.putText(frame, str(name[re]), (x + 20, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                #         print("Face is::",name[re])
+                    
+                    print("Face is::",name[re])
                 else:
                     cv2.putText(frame, "Unknown face", (x + 20, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
 
-        return frame
+        return frame,attendance
 
     def dlib_detector(self,image,threshold,inception_model):
         frame = image.copy()

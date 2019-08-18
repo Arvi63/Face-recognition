@@ -1,41 +1,29 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Face recognition</title>
-    <style>
-<!--        form{-->
-<!--            background-color:white;-->
-<!--            margin-left:400px;-->
-<!--            margin-top:50px;-->
-
-<!--        }-->
-    </style>
+  <title>Transparent Login Form with Bootstrap 4</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/styletrain.css">
 </head>
-
-
-<!--<img src="{{ url_for('recognize') }}">-->
-
-<form action="/feat" method="post">
-
-<!--<textarea rows="25" cols="70"></textarea>-->
-<br>
-<br>
-
-<input type="submit" value="Train">
-
-
-</form>
-
-<form action="/recognition" method="post">
-<!--    <img src="{{ url_for('recognize') }}">-->
-    <input type="submit" value="Recognition">
-</form>
-
-<form action="/add_image" method="post">
-
-    <input type="submit" value="Add Image">
-</form>
-
-
-
-
+<body>
+	<div class="modal-dialog text-center">
+			<div class="modal-content">
+				<form class="form-group" action="/feat" method="post">
+					<button type="submit" class="btn btn1"><i class="fas fa-sign-in-alt"></i>Train</button><br/>
+				</form>
+				<form class="form-group" action="/recognition" method="post">
+					<button type="submit" class="btn btn2"><i class="fa fa-refresh fa-spin"></i>Recognition</button><br/>
+				</form>
+				<form class="form-group" action="/add_image" method="post">
+					<button type="submit" class="btn btn3"><i class="fa fa-folder"></i>Add image</button>
+				</form>
+				
+			</div>
+	</div>
+</body>
 </html>

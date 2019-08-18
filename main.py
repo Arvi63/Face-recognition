@@ -9,12 +9,13 @@
 # from keras import Model
 # from keras import regularizers
 # from keras.preprocessing.image import ImageDataGenerator
+from config import *
 from keras import backend as K
 from keras.preprocessing import image
 import tensorflow as tf
 import glob
 import os
-
+import atexit
 from werkzeug import secure_filename
 from flask  import Flask,request,jsonify,render_template,Response,url_for,flash,redirect
 # from keras.optimizers import RMSprop
@@ -26,8 +27,11 @@ import pandas as pd
 import cv2
 import dlib
 # from add_image import ContactForm
-
+import os.path
 from flaskAPIHandler import APIHandler
+import csv
+import datetime
+import time
 api_handler = APIHandler()
 
 from take_image import Take_img
@@ -69,7 +73,9 @@ def recognition():
 
 def gen():
     # stream = VideoGear(source=0).start()
-    global cap
+    global cap,attendance,full_attendance
+    col_names = ['Name', 'Date', 'Time']
+    full_attendance = pd.DataFrame(columns=col_names)
     while True:
         # capture = cv2.VideoCapture(0)
         # ret, frame = capture.read()
@@ -80,18 +86,34 @@ def gen():
             # roi = face_detect.haar_cascade_detector(frame,threshold,mode)
             # frame = cv2.resize(frame, None, fx=0.6, fy=0.6)
         # global graph
-        with graph.as_default():    
-            try:
-                frame,cap = api_handler.predict_frame(mode)
-            except:
+        try:
+            with graph.as_default():
+
+                    frame,cap,attendance = api_handler.predict_frame(mode)
+                    print("fFramee::",attendance)
+            if (attendance.empty == False):
+                naam = attendance.iat[0, 0]
+                dat = attendance.iat[0, 1]
+                tim = attendance.iat[0, 2]
+                full_attendance.loc[len(full_attendance)] = [naam, dat, tim]
+            ret, jpeg = cv2.imencode(".jpg", frame)
+
+
+            frame_encode = jpeg.tobytes()
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame_encode + b'\r\n')
+        except:
                 print("Break from Recognition")
+                new_attendance = full_attendance.drop_duplicates(subset=['Name'], keep='first')
+                print("last ko:::::", new_attendance)
+                ts = time.time()
+                date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
+                timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+                Hour, Minute, Second = timeStamp.split(":")
+                fileName = "Attendance/Attendance_" + date + "_" + Hour + "-" + Minute + "-" + Second + ".csv"
+                new_attendance.to_csv(fileName, index=False)
                 break
-        ret, jpeg = cv2.imencode(".jpg", frame)
-
-
-        frame_encode = jpeg.tobytes()
-        yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame_encode + b'\r\n')
-
+                
+                
 
 @app.route('/recognize')
 def recognize():
@@ -157,15 +179,44 @@ def add_image_form():
             FACE_DIR = "feature_image/"
 
             print("hello world 2")
-            folder_name = request.data
-            print(folder_name)
-            id = request.get_json()
-            print(id)
-
-
+            folder_name = request.form['name']
+            print("folder_name:::", folder_name)
+            id = request.form['id']
             image = request.files['image']
-            print('folder name')
-            print(folder_name)
+
+            new_name = folder_name+'_'+str(id)
+            myCsvRow = [[id,new_name]]
+            if os.path.isfile('studentdups.csv') == False:
+                myFile = open('studentdups.csv','w')
+                myData = [['ID','Name']]
+                with myFile:
+                    writer = csv.writer(myFile)
+                    writer.writerows(myData)
+
+            file = open('studentdups.csv','a')
+            with file:
+                writers = csv.writer(file)
+                writers.writerows(myCsvRow)
+
+            df = pd.read_csv('studentdups.csv')
+            a = df.drop_duplicates(subset=['Name'],keep='first')
+            a.to_csv('StudentDetails.csv')
+
+
+
+
+            
+            # conn,cursor=connect_to_database()
+            # print("conn:::",conn)
+            # print("cursor:::",cursor)
+            # # sql = "insert into user_info (name) values(folder_name)"
+            # sql = "INSERT INTO user_info (name) VALUES ('%s')" % (folder_name)
+            # # cursor.execute(sql)
+            # print("execute:::::",cursor.execute(sql))
+            # # name = cursor.fetchone()
+            # cursor.close()
+            # conn.commit()
+
 
 
             
@@ -186,8 +237,8 @@ def add_image_form():
             UPLOAD_FOLDER = face_folder
             app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
             image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
-            
+                
+                
             return render_template('add_image.html')
     except:
         print('Errors')
@@ -199,8 +250,8 @@ def add_image_form():
 def stop_video():
     print(type(cap))
     cap.release()
-    # return redirect(url_for('temp'))
-    return render_template('index.html')
+    return redirect(url_for('temp'))
+    # return render_template('index.html')
 
 
 
@@ -211,7 +262,7 @@ def stop_video():
 
 if __name__=='__main__':
     global graph
-    mode = mod.load_facenet_model()
+    # mode = mod.load_facenet_model()
     graph = tf.get_default_graph()
     # app.run(debug=True,port='5001')
     app.run(host='0.0.0.0', port='5000')

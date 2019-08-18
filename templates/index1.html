@@ -1,10 +1,27 @@
+<!DOCTYPE html>
 <html>
-<head><title>Face Recognition</title></head>
+<head>
+  <title>Transparent Login Form with Bootstrap 4</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/stylestop.css">
+</head>
 <body>
-<img src="{{ url_for('recognize') }}">
-<br><br>
-<form action='/stop_video' method="post">
-<input type="submit" value="Stop">
-</form>
+	<div class="modal-dialog text-center">
+		<div class="c0l-sm-8 main section">
+			<div class="modal-content">
+				<div class="col-12 user-img">
+					<iframe src="{{ url_for('recognize') }}" height="320" width="400"></iframe>
+				</div>
+				<form class="col-12" action="/stop_video" method="post">
+					<button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i>Stop</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

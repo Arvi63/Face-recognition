@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7078397f-fbce-4a1b-99c5-75ebbcbed700" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/add_image.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encoding.py" beforeDir="false" afterPath="$PROJECT_DIR$/encoding.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/face_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/face_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/face_recog.py" beforeDir="false" afterPath="$PROJECT_DIR$/face_recog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskAPIHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskAPIHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/take_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/take_image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_encoding.npy" beforeDir="false" afterPath="$PROJECT_DIR$/test_encoding.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_face_name.npy" beforeDir="false" afterPath="$PROJECT_DIR$/test_face_name.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_label.npy" beforeDir="false" afterPath="$PROJECT_DIR$/test_label.npy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_image.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index1.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,11 +17,6 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="Face_rec" />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>load_feat</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,21 +63,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

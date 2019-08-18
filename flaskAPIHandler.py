@@ -8,6 +8,10 @@ from face_detector import Face_detector
 face_detect = Face_detector()
 from flask import Flask,render_template
 import sys
+import csv
+import datetime
+import time
+import pandas as pd
 
 
 class APIHandler:
@@ -46,13 +50,17 @@ class APIHandler:
 
 
             threshold = 0.65
+            roi,attendance = face_detect.haar_cascade_detector(frame,threshold,model)
+            print("attendance system:::::",attendance)
+            print("Attendance system ko type::",type(attendance))
 
-            roi = face_detect.haar_cascade_detector(frame,threshold,model)
-
-            return roi,self.capture
+            return roi,self.capture,attendance
         else:
             print("None and else condition")
             return None
+
+
+    
        
 
 
