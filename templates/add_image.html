@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Transparent Login Form with Bootstrap 4</title>
+  <title>Face Recognition||Main Page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -11,19 +11,26 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	
+	{% block content %}
 		<div class="modal-dialog text-center">
 		<div class="c0l-sm-8 main section">
 			<div class="modal-content">
 				<div class="col-12 user-img">
 					<img src="img/user-profile-login-computer-icons-avatar-avatar.jpg">
 				</div>
+				{% with messages = get_flashed_messages() %}
+		        {% if messages %}
+		            <div class="notification is-danger">
+		                {{ messages[0] }}
+		            </div>
+		        {% endif %}
+		        {% endwith %}
 				<form class="col-12" action="/add_image_form" method="post" enctype = "multipart/form-data" name='userForm' id="formSubmit">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Enter Name" name='name' id='name'>
 					</div>
 					<div class="form-group">
-						<input type="number" class="form-control" placeholder="Enter ID" name='id'>
+						<input type="number" class="form-control" placeholder="Enter Roll No." name='id'>
 					</div>
 					<div class="form-group">
 						<input type="file" class="form-control" name='image' id='image' multiple>
@@ -33,7 +40,7 @@
 			</div>
 		</div>
 	</div>
-	
+	{% endblock %}
 	
 </body>
 </html>

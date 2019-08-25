@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 body{
-	background: url(img/96913928-creative-glowing-digital-head-wallpaper-robotics-and-cyberspace-concept-3d-rendering.jpg) no-repeat; 
+	background: url("../img/96913928-creative-glowing-digital-head-wallpaper-robotics-and-cyberspace-concept-3d-rendering.jpg") no-repeat; 
     background-size: cover;
 }
 .modal-dialog {
 	margin-right: 100px;
 	margin-top: 70px;
 }
-.modal-content {
+.modal-content {	
 	background-color: #3b4652;
 	opacity: .95;
-	padding: 0 18px;
+	padding: 0 10px;
 	box-shadow: 0px 0px 3px #848484;
 
 }

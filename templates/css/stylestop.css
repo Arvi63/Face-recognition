@@ -2,7 +2,7 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	/*background-color: #537699*/
-	background: url(img/wp2691570-cyber-security-wallpapers.jpg) no-repeat; 
+	background: url(../img/wp2691570-cyber-security-wallpapers.jpg) no-repeat; 
     background-size: cover;
 }
 .modal-dialog{
