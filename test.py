@@ -65,4 +65,5 @@ print(a)
 df=pd.read_csv("studentdups.csv")
 b = df[df['Name'] == a].index
 df = df.drop(b)
+df.to_csv('studentdups.csv')
 print(df)

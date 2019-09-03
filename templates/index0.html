@@ -1,4 +1,5 @@
-
+{% extends "header.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +25,26 @@
 				<form class="form-group" action="/add_image" method="post">
 					<button type="submit" class="btn btn3"><i class="fa fa-folder"></i>Add image</button>
 				</form>
-				<a href="{{ url_for('logout') }}" class="btn btn1">
+				<!-- <a href="{{ url_for('logout') }}" class="btn btn1">
                                 Logout
+            	</a> -->
+            	<a  class="btn btn1" href="{{ url_for('student_info') }}" class="btn btn1">
+                                Student Info
             	</a>
 				
 			</div>
 	</div>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="dist/js/sb-admin-2.js"></script>
 </body>
 </html>
+{% endblock %}

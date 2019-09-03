@@ -5,6 +5,7 @@ import csv
 import datetime
 import time
 import pandas as pd
+from query import *
 
 from check_distance import Check_distance
 check_dist = Check_distance()
@@ -12,8 +13,8 @@ face_rec = Face_recog()
 class Face_detector:
 
     def haar_cascade_detector(self,image,threshold,inception_model):
-        df=pd.read_csv("StudentDetails.csv")
-        df = df.drop('Unnamed: 0', axis=1)
+        # df=pd.read_csv("StudentDetails.csv")
+        # df = df.drop('Unnamed: 0', axis=1)
         col_names =  ['Name','Date','Time']
         attendance = pd.DataFrame(columns = col_names)   
         frame = image.copy()
@@ -30,12 +31,16 @@ class Face_detector:
                     date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
                     timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
                     try:
-                        aa=df.loc[df['Name'] == name[re]].values
-                        ab= aa[0][1]
-                        print("aa ko print::::",aa)
-                        attendance.loc[len(attendance)] = [ab,date,timeStamp]
+                        # aa=df.loc[df['Name'] == name[re]].values
+                        # ab= aa[0][1]
+                        # print("aa ko print::::",aa)
+                        res = check_name(name[re])
+                        if res == 1:
+                            attendance.loc[len(attendance)] = [name[re],date,timeStamp]
+                        else:
+                            print("face name not in database")
                     except:
-                        print("face name not in csv file")
+                        print("face name not in database")
                     cv2.putText(frame, str(name[re]), (x + 20, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                     
                     print("Face is::",name[re])
