@@ -1,5 +1,5 @@
-from keras.models import load_model
-from keras import models
+from tensorflow.keras.models import load_model
+from tensorflow.keras import models
 import tensorflow as tf
 class Model:
     def load_facenet_model(self):

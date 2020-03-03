@@ -1,27 +1,27 @@
-# from keras.models import Sequential
-# from keras import models, layers
-# from keras import applications
-# from keras.applications.inception_v3 import InceptionV3
-# from keras.layers import Conv2D
-# from keras.layers import MaxPooling2D
-# from keras.layers import Flatten, Dense, Activation, Dropout
-# from keras.layers.normalization import BatchNormalization
-# from keras import Model
-# from keras import regularizers
-# from keras.preprocessing.image import ImageDataGenerator
+# from tensorflow.keras.models import Sequential
+# from tensorflow.keras import models, layers
+# from tensorflow.keras import applications
+# from tensorflow.keras.applications.inception_v3 import InceptionV3
+# from tensorflow.keras.layers import Conv2D
+# from tensorflow.keras.layers import MaxPooling2D
+# from tensorflow.keras.layers import Flatten, Dense, Activation, Dropout
+# from tensorflow.keras.layers.normalization import BatchNormalization
+# from tensorflow.keras import Model
+# from tensorflow.keras import regularizers
+# from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import uuid
 import shutil
 from config import *
 from query import *
-from keras import backend as K
-from keras.preprocessing import image
+from tensorflow.keras import backend as K
+from tensorflow.keras.preprocessing import image
 import tensorflow as tf
 import glob
 import os
 import atexit
 from werkzeug import secure_filename
 from flask  import Flask,request,jsonify,render_template,Response,url_for,flash,redirect,session
-# from keras.optimizers import RMSprop
+# from tensorflow.keras.optimizers import RMSprop
 import numpy as np
 from vidgear.gears import VideoGear
 # import matplotlib.pyplot as plt
